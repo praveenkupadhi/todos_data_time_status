@@ -60,11 +60,17 @@ export const Todos = () => {
 						Clear All Completed Tasks
 					</button>
 					<div className="todosList">
+						<div id="heading">
+							<p>Task</p>
+							<p>Date And Time</p>
+							<p>Status</p>
+							<p>Operation</p>
+						</div>
 						{todosData.map((e) => {
 							return (
 								<div key={e.id}>
 									<p>{e.task}</p>
-									<p>{e.dateAndTime}</p>
+									<p>{e.dateAndTime.split("T").join("  |  ")}</p>
 									<button id={e.id} onClick={handleClickMark}>
 										{e.status ? "Completed" : "Not Completed"}
 									</button>
