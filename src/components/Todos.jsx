@@ -20,7 +20,7 @@ export const Todos = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (e.target[1].value === "") {
-			alert("Date and time need to filled");
+			alert("Date and time need to be filled");
 		} else {
 			dispatch(
 				addTodoData({

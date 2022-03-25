@@ -35,7 +35,7 @@ export const getTodoData = () => {
 	return (dispatch) => {
 		dispatch(getTodoRequest());
 		axios
-			.get("http://localhost:3001/todos")
+			.get("https://todos-json-server-backend.herokuapp.com/todos")
 			.then((res) => {
 				dispatch(getTodoSuccess(res.data));
 			})
@@ -62,7 +62,7 @@ export const addTodoData = (todo) => {
 	return (dispatch) => {
 		dispatch(addTodoRequest());
 		axios
-			.post("http://localhost:3001/todos", todo)
+			.post("https://todos-json-server-backend.herokuapp.com/todos", todo)
 			.then(() => {
 				dispatch(addTodoSuccess());
 				dispatch(getTodoData());
@@ -89,7 +89,9 @@ export const statusChangeData = (id, status) => {
 		dispatch(statusChangeRequest());
 		if (status === "Completed") {
 			axios
-				.patch(`http://localhost:3001/todos/${id}`, { status: false })
+				.patch(`https://todos-json-server-backend.herokuapp.com/todos/${id}`, {
+					status: false,
+				})
 				.then(() => {
 					dispatch(statusChangeSuccess());
 					dispatch(getTodoData());
@@ -97,7 +99,9 @@ export const statusChangeData = (id, status) => {
 				.catch((error) => dispatch(statusChangeFailure(error)));
 		} else if (status === "Not Completed") {
 			axios
-				.patch(`http://localhost:3001/todos/${id}`, { status: true })
+				.patch(`https://todos-json-server-backend.herokuapp.com/todos/${id}`, {
+					status: true,
+				})
 				.then(() => {
 					dispatch(statusChangeSuccess());
 					dispatch(getTodoData());
@@ -124,7 +128,7 @@ export const deleteTodoData = (id) => {
 	return (dispatch) => {
 		dispatch(deleteTodoRequest());
 		axios
-			.delete(`http://localhost:3001/todos/${id}`)
+			.delete(`https://todos-json-server-backend.herokuapp.com/todos/${id}`)
 			.then(() => {
 				dispatch(deleteTodoSuccess());
 				dispatch(getTodoData());
@@ -149,20 +153,24 @@ export const deleteCompletedTodoFailure = (payload) => ({
 export const deleteCompletedTodoData = () => {
 	return (dispatch) => {
 		dispatch(deleteTodoRequest());
-		axios.get("http://localhost:3001/todos").then((res) => {
-			res.data.forEach((e) => {
-				if (e.status === true) {
-					axios
-						.delete(`http://localhost:3001/todos/${e.id}`)
-						.then(() => {
-							dispatch(deleteCompletedTodoSuccess());
-							dispatch(getTodoData());
-						})
-						.catch((error) => {
-							dispatch(deleteCompletedTodoFailure(error));
-						});
-				}
+		axios
+			.get("https://todos-json-server-backend.herokuapp.com/todos")
+			.then((res) => {
+				res.data.forEach((e) => {
+					if (e.status === true) {
+						axios
+							.delete(
+								`https://todos-json-server-backend.herokuapp.com/todos/${e.id}`
+							)
+							.then(() => {
+								dispatch(deleteCompletedTodoSuccess());
+								dispatch(getTodoData());
+							})
+							.catch((error) => {
+								dispatch(deleteCompletedTodoFailure(error));
+							});
+					}
+				});
 			});
-		});
 	};
 };
