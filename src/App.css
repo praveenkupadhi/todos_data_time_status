@@ -1,38 +1,85 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+form {
+	width: 250px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	border-radius: 5px;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	margin-bottom: 20px;
+}
+form > input {
+	height: 30px;
+	border-radius: 5px;
+	border-color: greenyellow;
+	font-size: 20px;
+}
+form > input:last-child,
+button {
+	border-color: rgb(34, 34, 204);
+	width: 127px;
+	margin: auto;
+	border-radius: 5px;
+}
+form > input:last-child:hover,
+button:hover {
+	cursor: pointer;
+	background-color: cyan;
+}
+h2 {
+	color: tomato;
+}
+h3 {
+	color: crimson;
+}
+.todosList {
+	display: flex;
+	border: 1px solid red;
+	width: 600px;
+	margin: auto;
+	flex-direction: column;
+}
+.todosList > div {
+	display: grid;
+	border: 1px solid teal;
+	grid-template-columns: repeat(4, 150px);
 }
